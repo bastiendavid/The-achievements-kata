@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+</head>
+<body>
+
+<div class="content">
+    <div class="title-background title-text">
+        <div class="title-text">
+            The achievements kata
+        </div>
+    </div>
+
+    <div class="rules-text">
+        <p>
+            Rules are simple :<br>
+            Pick a kata.<br>
+            Complete as many achievements as you can while doing the kata.<br>
+        </p>
+        <p>
+            Depending on which achievements you choose to complete, you will be given a title. Play many times to try
+            and get all the titles :)
+        </p>
+    </div>
+
+    <div id="player-title" class="your-title">
+        Your title: Of The Null
+    </div>
+
+    <div id="achievements" class="achievements">
+
+    </div>
+
+</div>
+
+
+<script src="script/achievements.js" type="text/javascript"></script>
+<script type="text/javascript">
+    new Achievements(document).createAllAchievements();
+</script>
+</body>
+</html>
