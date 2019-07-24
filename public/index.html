@@ -50,7 +50,8 @@
 
 <script src="script/achievements.js" type="text/javascript"></script>
 <script type="text/javascript">
-    new Achievements(document).createAllAchievements();
+    let analyticsTracker = new AnalyticsTracker(gtag);
+    new Achievements(document, analyticsTracker).createAllAchievements();
 </script>
 </body>
 </html>

@@ -21,8 +21,9 @@ class Achievement {
 
 class Achievements {
 
-    constructor(document) {
+    constructor(document, analyticsTracker) {
         this.document = document;
+        this.analyticsTracker = analyticsTracker;
         this.achievementsCompleted = [];
         this.achievements = [];
         this.achievements.push(new Achievement('IDE_RENAME_VARIABLE', Categories.TOOLS, 'Rename a variable with the IDE'));
@@ -115,6 +116,7 @@ class Achievements {
             this.hideElement(achievementInProgress);
             this.showElement(achievementComplete);
             this.achievementsCompleted.push(achievement);
+            this.analyticsTracker.achievementCompleted(achievement.id);
             this.updateTitle();
         };
         return button;
@@ -210,5 +212,15 @@ class Achievements {
             'Neo'
         ];
         return beginnersTitles[Math.min(this.achievementsCompleted.length - 1, beginnersTitles.length - 1)];
+    }
+}
+
+class AnalyticsTracker {
+    constructor(gtag) {
+        this.gtag = gtag;
+    }
+
+    achievementCompleted(achievementId) {
+        gtag('event', 'achievement_completed', {'event_label': achievementId});
     }
 }
