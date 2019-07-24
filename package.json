@@ -1,0 +1,15 @@
+{
+  "name": "achievements-kata",
+  "version": "1.0.0",
+  "description": "Achievements kata application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "firebase deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "firebase-tools": "^7.1.1"
+  }
+}
