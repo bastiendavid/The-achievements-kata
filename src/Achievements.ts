@@ -1,31 +1,17 @@
-const Categories = {
-    REFACTORING: 'REFACTORING',
-    REMOVE: 'REMOVE',
-    TEST: 'TEST',
-    SIMPLIFY: 'SIMPLIFY',
-    TOOLS: 'TOOLS',
-    SMALL_STEPS: 'SMALL_STEPS',
-    OUTSIDE_THE_BOX: 'OUTSIDE_THE_BOX',
-    CRAZY: 'CRAZY'
-};
+import {AnalyticsTracker} from "./AnalyticsTracker";
+import {Achievement} from "./Achievement";
+import {Categories} from "./Categories";
 
+export class Achievements {
 
-class Achievement {
+    private readonly document: Document;
+    private readonly analyticsTracker: AnalyticsTracker;
+    private achievementsCompleted: Achievement[] = [];
+    private achievements: Achievement[] = [];
 
-    constructor(id, category, description) {
-        this.id = id;
-        this.category = category;
-        this.description = description;
-    }
-}
-
-class Achievements {
-
-    constructor(document, analyticsTracker) {
+    constructor(document: Document, analyticsTracker: AnalyticsTracker) {
         this.document = document;
         this.analyticsTracker = analyticsTracker;
-        this.achievementsCompleted = [];
-        this.achievements = [];
         this.achievements.push(new Achievement('IDE_RENAME_VARIABLE', Categories.TOOLS, 'Rename a variable with the IDE'));
         this.achievements.push(new Achievement('IDE_EXTRACT_VARIABLE', Categories.TOOLS, 'Extract a variable with the IDE'));
         this.achievements.push(new Achievement('IDE_INLINE_VARIABLE', Categories.TOOLS, 'Inline a variable with the IDE'));
@@ -80,18 +66,17 @@ class Achievements {
         });
     }
 
-    writeAchievementToDOM(achievement) {
+    writeAchievementToDOM(achievement: Achievement) {
         const container = this.document.getElementById('achievements');
         container.appendChild(this.createAchievementInProgressDiv(achievement));
         container.appendChild(this.createAchievementCompleteDiv(achievement));
     }
 
-    createAchievementInProgressDiv(achievement) {
+    createAchievementInProgressDiv(achievement: Achievement) {
         let achievementDiv = this.document.createElement('div');
         achievementDiv.id = this.achievementInProgressId(achievement);
         achievementDiv.classList.add('achievement');
         achievementDiv.classList.add('achievement-in-progress');
-        achievementDiv.visibility = 'visible';
 
         achievementDiv.appendChild(this.createAchievementDescriptionDiv(achievement));
         achievementDiv.appendChild(this.createAchievementCompletedButton(achievement));
@@ -99,14 +84,14 @@ class Achievements {
         return achievementDiv;
     }
 
-    createAchievementDescriptionDiv(achievement) {
+    createAchievementDescriptionDiv(achievement: Achievement) {
         let description = this.document.createElement('div');
         description.innerHTML = achievement.description;
         description.classList.add('achievement-description');
         return description;
     }
 
-    createAchievementCompletedButton(achievement) {
+    createAchievementCompletedButton(achievement: Achievement) {
         let button = this.document.createElement('div');
         button.innerText = 'Done!';
         button.classList.add('achievement-in-progress-button');
@@ -122,15 +107,15 @@ class Achievements {
         return button;
     }
 
-    achievementCompletedId(achievement) {
+    achievementCompletedId(achievement: Achievement) {
         return 'achievements-completed-' + achievement.id;
     }
 
-    achievementInProgressId(achievement) {
+    achievementInProgressId(achievement: Achievement) {
         return 'achievement-in-progress-' + achievement.id;
     }
 
-    createAchievementCompleteDiv(achievement) {
+    createAchievementCompleteDiv(achievement: Achievement) {
         let achievementDiv = this.document.createElement('div');
         achievementDiv.id = this.achievementCompletedId(achievement);
         achievementDiv.classList.add('achievement');
@@ -149,11 +134,11 @@ class Achievements {
         return image;
     }
 
-    hideElement(div) {
+    hideElement(div: HTMLElement) {
         div.style.display = 'none';
     }
 
-    showElement(div) {
+    showElement(div: HTMLElement) {
         div.style.display = 'flex';
     }
 
@@ -212,15 +197,5 @@ class Achievements {
             'Neo'
         ];
         return beginnersTitles[Math.min(this.achievementsCompleted.length - 1, beginnersTitles.length - 1)];
-    }
-}
-
-class AnalyticsTracker {
-    constructor(gtag) {
-        this.gtag = gtag;
-    }
-
-    achievementCompleted(achievementId) {
-        gtag('event', 'achievement_completed', {'event_label': achievementId});
     }
 }

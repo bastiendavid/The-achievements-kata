@@ -2,15 +2,19 @@
   "name": "achievements-kata",
   "version": "1.0.0",
   "description": "Achievements kata application",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp -r public dist && cp node_modules/requirejs/require.js dist/script && tsc",
     "start": "firebase serve",
     "deploy": "firebase deploy"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "firebase-tools": "^7.1.1"
+    "firebase-tools": "^7.1.2",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "requirejs": "^2.3.6"
   }
 }
