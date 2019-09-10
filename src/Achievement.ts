@@ -22,4 +22,25 @@ export class Achievement {
             child.state = State.UNLOCKED;
         });
     }
+
+    convertToUnlocksGrid(): Map<number, Achievement[]> {
+        let grid: Map<number, Achievement[]> = new Map();
+        this.pushAchievementToGrid(this, 0, grid);
+        return grid;
+    }
+
+    pushAchievementToGrid(achievement: Achievement, deepLevel: number, grid: Map<number, Achievement[]>) {
+        // create level
+        if (grid.get(deepLevel) === undefined) {
+            grid.set(deepLevel, []);
+        }
+        // avoid duplicates
+        if (grid.get(deepLevel).indexOf(achievement) === -1) {
+            grid.get(deepLevel).push(achievement);
+        }
+        // proceed to sub-nodes
+        achievement.unlocks.forEach((unlock) => {
+            this.pushAchievementToGrid(unlock, deepLevel + 1, grid);
+        })
+    }
 }
