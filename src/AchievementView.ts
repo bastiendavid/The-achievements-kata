@@ -91,6 +91,7 @@ export class AchievementView implements AchievementObserver {
 
     private achievementCompleted() {
         this.achievement.complete();
+        new Audio("sounds/complete.wav").play();
         this.analyticsTracker.achievementCompleted(this.achievement.data.id);
         this.updateView();
     }
