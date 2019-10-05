@@ -1,14 +1,17 @@
 import {Achievement} from "./Achievement";
 import {State} from "./State";
 import {AchievementObserver} from "./AchievementObserver";
+import {AnalyticsTracker} from "./AnalyticsTracker";
 
 export class AchievementView implements AchievementObserver {
     private achievement: Achievement;
-    private document: Document;
+    private readonly document: Document;
+    private readonly analyticsTracker: AnalyticsTracker;
     private view: HTMLElement;
 
-    constructor(document: Document, achievement: Achievement) {
+    constructor(document: Document, analyticsTracker: AnalyticsTracker, achievement: Achievement) {
         this.document = document;
+        this.analyticsTracker = analyticsTracker;
         this.achievement = achievement;
         this.achievement.register(this);
         this.initView();
@@ -83,6 +86,7 @@ export class AchievementView implements AchievementObserver {
 
     private achievementCompleted() {
         this.achievement.complete();
+        this.analyticsTracker.achievementCompleted(this.achievement.data.id);
         this.updateView();
     }
 

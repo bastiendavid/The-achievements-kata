@@ -1,8 +1,14 @@
 import {AchievementView} from "./AchievementView";
 import {Achievement} from "./Achievement";
 import {AchievementsTree} from "./AchievementsTree";
+import {AnalyticsTracker} from "./AnalyticsTracker";
 
 export class AchievementsView {
+    private readonly analyticsTracker: AnalyticsTracker;
+
+    constructor(analyticsTracker: AnalyticsTracker) {
+        this.analyticsTracker = analyticsTracker;
+    }
 
     display(document: Document, containerId: string) {
         const achievement = new AchievementsTree().getFirstAchievement();
@@ -36,7 +42,7 @@ export class AchievementsView {
     }
 
     private addAchievementToGraphRow(document: Document, graphRow: HTMLElement, achievement: Achievement) {
-        let view = new AchievementView(document, achievement);
+        let view = new AchievementView(document, this.analyticsTracker, achievement);
         graphRow.appendChild(view.getView());
     }
 }
