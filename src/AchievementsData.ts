@@ -53,4 +53,7 @@ export class AchievementsData {
         this.data.push(new AchievementData('COMPLETE_KATA', Categories.CRAZY, 'Complete the kata'));
     }
 
+    for(achievementId: string): AchievementData {
+        return this.data.filter((achievementData: AchievementData) => achievementData.id === achievementId)[0];
+    }
 }

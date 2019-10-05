@@ -14,6 +14,10 @@ export class Achievement {
         this.state = State.LOCKED;
     }
 
+    addUnlock(achievement: Achievement) {
+        this.unlocks.push(achievement);
+    }
+
     register(observer: AchievementObserver) {
         this.observer = observer;
     }
