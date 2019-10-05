@@ -2,6 +2,7 @@ import {AnalyticsTracker} from "./AnalyticsTracker";
 import {AchievementData} from "./AchievementData";
 import {Categories} from "./Categories";
 
+// Deprecated: remove
 export class Achievements {
 
     private readonly document: Document;
