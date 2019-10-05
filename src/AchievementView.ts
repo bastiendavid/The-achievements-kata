@@ -1,4 +1,5 @@
 import {Achievement} from "./Achievement";
+import {State} from "./State";
 
 export class AchievementView {
     private achievement: Achievement;
@@ -13,9 +14,24 @@ export class AchievementView {
 
     private updateView() {
         this.view = this.document.createElement("div");
+        this.view.className = '';
         this.view.classList.add('achievement-card');
-        this.view.appendChild(this.createAchievementDescriptionDiv())
-        this.view.appendChild(this.createAchievementCompletedActionButton());
+        switch (this.achievement.state) {
+            case State.UNLOCKED:
+                this.view.classList.add('achievement-card-unlocked');
+                this.view.appendChild(this.createAchievementDescriptionDiv());
+                this.view.appendChild(this.createAchievementCompletedActionButton());
+                break;
+            case State.LOCKED:
+                this.view.classList.add('achievement-card-locked');
+                this.view.appendChild(this.createAchievementLockedView());
+                break;
+            case State.COMPLETED:
+                this.view.classList.add('achievement-card-completed');
+                this.view.appendChild(this.createAchievementDescriptionDiv());
+                this.view.appendChild(this.createAchievementCompletedActionButton());
+                break;
+        }
     }
 
     private createAchievementDescriptionDiv(): HTMLElement {
@@ -34,5 +50,12 @@ export class AchievementView {
 
     getView(): HTMLElement {
         return this.view;
+    }
+
+    private createAchievementLockedView(): HTMLElement {
+        let lockedView = this.document.createElement('div');
+        lockedView.innerText = '?';
+        lockedView.classList.add('achievement-locked-view');
+        return lockedView;
     }
 }
