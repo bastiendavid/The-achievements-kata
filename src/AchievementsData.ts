@@ -27,13 +27,8 @@ export class AchievementsData {
         this.data.push(new AchievementData('REMOVE_100_LINES_OF_CODE', Categories.REMOVE, 'Remove 100 lines of code in one commit'));
         this.data.push(new AchievementData('WRAP_PRIMITIVE', Categories.SIMPLIFY, 'Wrap a primitive'));
         this.data.push(new AchievementData('WRAP_COLLECTION', Categories.SIMPLIFY, 'Wrap a collection'));
-        this.data.push(new AchievementData('IMPLEMENT_FAST_AND_REFACTOR', Categories.CRAZY, 'Implement a feature the fastest you can, and then refactor the code you produced'));
         this.data.push(new AchievementData('GIT_REBASE_INTERACTIVE', Categories.TOOLS, 'Perform an interactive rebase with git'));
         this.data.push(new AchievementData('GIT_AMEND', Categories.TOOLS, 'Amend a commit with git'));
-        this.data.push(new AchievementData('REFACTORING_PARALLEL_CHANGE', Categories.REFACTORING, 'Perform refactoring using parallel change'));
-        this.data.push(new AchievementData('REFACTORING_BRANCH_BY_ABSTRACTION', Categories.REFACTORING, 'Perform refactoring using a branch by abstraction'));
-        this.data.push(new AchievementData('REFACTORING_LIFT_UP_CONDITIONAL', Categories.REFACTORING, 'Perform refactoring using a lift up conditional refactoring'));
-        this.data.push(new AchievementData('REFACTORING_PEEL_AND_SLICE', Categories.REFACTORING, 'Perform refactoring using the peel and slice technique'));
         this.data.push(new AchievementData('NO_IDE_WRITE_TEST_AND_MAKE_PASS', Categories.CRAZY, 'Write a test and make it pass without IDE (no syntax checking allowed in your text editor, and your tests should run outside of the IDE)'));
         this.data.push(new AchievementData('WRITE_METHOD_WITHOUT_E', Categories.CRAZY, 'Write a method without using the letter "e"'));
         this.data.push(new AchievementData('WRITE_METHOD_WITHOUT_A', Categories.CRAZY, 'Write a method without using the letter "a"'));
@@ -50,7 +45,6 @@ export class AchievementsData {
         this.data.push(new AchievementData('NO_SITTING_FOR_10_MINS', Categories.CRAZY, 'For 10 minutes, don\'t sit'));
         this.data.push(new AchievementData('METHOD_THAT_RHYMES', Categories.CRAZY, 'Write a method with code that rhymes'));
         this.data.push(new AchievementData('NO_TESTS_FOR_10_MINS', Categories.CRAZY, 'For 10 minutes, don\'t write tests, and then write all the missing tests'));
-        this.data.push(new AchievementData('COMPLETE_KATA', Categories.CRAZY, 'Complete the kata'));
     }
 
     for(achievementId: string): AchievementData {
