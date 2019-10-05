@@ -68,10 +68,15 @@ export class AchievementView implements AchievementObserver {
     }
 
     private createAchievementDescriptionDiv(): HTMLElement {
-        let description = this.document.createElement('div');
-        description.innerText = this.achievement.data.description;
-        description.classList.add('achievement-card-description');
-        return description;
+        let descriptionContainer = this.document.createElement('div');
+        descriptionContainer.classList.add('achievement-card-description');
+
+        let descriptionText = this.document.createElement('div');
+        descriptionText.innerText = this.achievement.data.description;
+        descriptionText.classList.add('achievement-card-description-text');
+        descriptionContainer.appendChild(descriptionText);
+
+        return descriptionContainer;
     }
 
     private createAchievementCompletedActionButton(): HTMLElement {
