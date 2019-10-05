@@ -1,7 +1,8 @@
 import {Achievement} from "./Achievement";
 import {State} from "./State";
+import {AchievementObserver} from "./AchievementObserver";
 
-export class AchievementView {
+export class AchievementView implements AchievementObserver {
     private achievement: Achievement;
     private document: Document;
     private view: HTMLElement;
@@ -9,8 +10,8 @@ export class AchievementView {
     constructor(document: Document, achievement: Achievement) {
         this.document = document;
         this.achievement = achievement;
+        this.achievement.register(this);
         this.initView();
-        this.updateView();
     }
 
     getView(): HTMLElement {
@@ -19,6 +20,11 @@ export class AchievementView {
 
     private initView() {
         this.view = this.document.createElement("div");
+        this.updateView();
+    }
+
+    onAchievementStatusChange(): void {
+        this.updateView();
     }
 
     private updateView() {
@@ -86,5 +92,4 @@ export class AchievementView {
         lockedView.classList.add('achievement-locked-view');
         return lockedView;
     }
-
 }
