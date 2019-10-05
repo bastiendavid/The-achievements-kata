@@ -15,7 +15,7 @@ body {
 }
 
 .title-background {
-    background-color: #d4f2db;
+    background-color: white;
     border-radius: 7px;
     width: 100%;
     padding-top: 30px;
@@ -36,66 +36,6 @@ body {
     font-size: 1.4em;
 }
 
-.your-title {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.achievements {
-    width: 100%;
-}
-
-.achievement {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 7px;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-}
-
-.achievement-description {
-    font-size: 1.3em;
-    font-weight: bold;
-    flex-grow: 1;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-}
-
-.achievement-in-progress {
-    background-color: #4c5f99;
-    color: white;
-}
-
-.achievement-in-progress-button {
-    padding: 10px 15px;
-    color: black;
-    font-size: 1.3em;
-    font-weight: bold;
-    border-radius: 10px;
-    background-color: #FFDF0F;
-    cursor: pointer;
-}
-
-.achievement-completed {
-    background-color: #2fbfa0;
-    color: black;
-}
-
-.achievement-completed-image {
-    height: 64px;
-    padding: 10px;
-    margin-right: 20px;
-}
-
-/** New classes - above classes about achievements are deprecated **/
 .achievement-card {
     width: 250px;
     height: 350px;
