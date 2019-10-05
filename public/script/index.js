@@ -1,5 +1,4 @@
-require(['AnalyticsTracker', 'Achievements', 'AchievementsView'], (AnalyticsTracker, Achievements, AchievementsView) => {
+require(['AnalyticsTracker', 'AchievementsView'], (AnalyticsTracker, AchievementsView) => {
     let analyticsTracker = new AnalyticsTracker.AnalyticsTracker(gtag);
-    new Achievements.Achievements(document, analyticsTracker).createAllAchievements();
     new AchievementsView.AchievementsView(analyticsTracker).display(document, "graph");
 });
