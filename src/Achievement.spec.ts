@@ -3,6 +3,7 @@ import {AchievementData} from "./AchievementData";
 import {Categories} from "./Categories";
 import {State} from "./State";
 import {expect} from "chai";
+import {AchievementObserver} from "./AchievementObserver";
 
 describe("Achievement", () => {
     it("Default state is LOCKED", () => {
@@ -98,6 +99,43 @@ describe("Achievement", () => {
             expectedGrid.set(1, [b, c]);
             expectedGrid.set(2, [d, e]);
             expect(grid).to.deep.equal(expectedGrid);
+        });
+    });
+
+    describe("notifies its observer if has one", () => {
+
+        class FakeAchievementObserver implements AchievementObserver {
+            public statusChanged: boolean = false;
+
+            onAchievementStatusChange(): void {
+                this.statusChanged = true;
+            }
+        }
+
+        it("when is unlocked", () => {
+            // Given
+            let achievement = new Achievement(new AchievementData("ACH_1", Categories.SIMPLIFY, "description"), []);
+            let observer = new FakeAchievementObserver();
+            achievement.register(observer);
+
+            // When
+            achievement.unlock();
+
+            // Then
+            expect(observer.statusChanged).to.eq(true);
+        });
+
+        it("when is completed", () => {
+            // Given
+            let achievement = new Achievement(new AchievementData("ACH_1", Categories.SIMPLIFY, "description"), []);
+            let observer = new FakeAchievementObserver();
+            achievement.register(observer);
+
+            // When
+            achievement.complete();
+
+            // Then
+            expect(observer.statusChanged).to.eq(true);
         });
     });
 });

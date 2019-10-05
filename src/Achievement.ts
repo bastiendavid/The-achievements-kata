@@ -1,10 +1,12 @@
 import {AchievementData} from "./AchievementData";
 import {State} from "./State";
+import {AchievementObserver} from "./AchievementObserver";
 
 export class Achievement {
     readonly data: AchievementData;
     readonly unlocks: Achievement[];
     state: State;
+    private observer: AchievementObserver;
 
     constructor(data: AchievementData, unlocks: Achievement[]) {
         this.data = data;
@@ -12,12 +14,24 @@ export class Achievement {
         this.state = State.LOCKED;
     }
 
+    register(observer: AchievementObserver) {
+        this.observer = observer;
+    }
+
+    private notifyStateChange() {
+        if (this.observer) {
+            this.observer.onAchievementStatusChange();
+        }
+    }
+
     unlock() {
         this.state = State.UNLOCKED;
+        this.notifyStateChange();
     }
 
     complete() {
         this.state = State.COMPLETED;
+        this.notifyStateChange();
         this.unlocks.forEach((child: Achievement) => {
             child.state = State.UNLOCKED;
         });
