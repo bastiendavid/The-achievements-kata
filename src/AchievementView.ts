@@ -9,29 +9,53 @@ export class AchievementView {
     constructor(document: Document, achievement: Achievement) {
         this.document = document;
         this.achievement = achievement;
+        this.initView();
         this.updateView();
     }
 
-    private updateView() {
+    getView(): HTMLElement {
+        return this.view;
+    }
+
+    private initView() {
         this.view = this.document.createElement("div");
+    }
+
+    private updateView() {
+        while (this.view.firstChild) {
+            this.view.removeChild(this.view.firstChild);
+        }
         this.view.className = '';
         this.view.classList.add('achievement-card');
+
         switch (this.achievement.state) {
             case State.UNLOCKED:
-                this.view.classList.add('achievement-card-unlocked');
-                this.view.appendChild(this.createAchievementDescriptionDiv());
-                this.view.appendChild(this.createAchievementCompletedActionButton());
+                this.displayAsUnlocked();
                 break;
             case State.LOCKED:
-                this.view.classList.add('achievement-card-locked');
-                this.view.appendChild(this.createAchievementLockedView());
+                this.displayAsLocked();
                 break;
             case State.COMPLETED:
-                this.view.classList.add('achievement-card-completed');
-                this.view.appendChild(this.createAchievementDescriptionDiv());
-                this.view.appendChild(this.createAchievementCompletedActionButton());
+                this.displayAsCompleted();
                 break;
         }
+    }
+
+    private displayAsUnlocked() {
+        this.view.classList.add('achievement-card-unlocked');
+        this.view.appendChild(this.createAchievementDescriptionDiv());
+        this.view.appendChild(this.createAchievementCompletedActionButton());
+    }
+
+    private displayAsLocked() {
+        this.view.classList.add('achievement-card-locked');
+        this.view.appendChild(this.createAchievementLockedView());
+    }
+
+    private displayAsCompleted() {
+        this.view.classList.add('achievement-card-completed');
+        this.view.appendChild(this.createAchievementDescriptionDiv());
+        this.view.appendChild(this.createAchievementCompletedActionButton());
     }
 
     private createAchievementDescriptionDiv(): HTMLElement {
@@ -45,11 +69,15 @@ export class AchievementView {
         let button = this.document.createElement('div');
         button.innerText = 'Next';
         button.classList.add('achievement-completed-action-button');
+        button.onclick = () => {
+            this.achievementCompleted();
+        };
         return button;
     }
 
-    getView(): HTMLElement {
-        return this.view;
+    private achievementCompleted() {
+        this.achievement.complete();
+        this.updateView();
     }
 
     private createAchievementLockedView(): HTMLElement {
@@ -58,4 +86,5 @@ export class AchievementView {
         lockedView.classList.add('achievement-locked-view');
         return lockedView;
     }
+
 }
