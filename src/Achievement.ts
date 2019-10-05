@@ -33,7 +33,7 @@ export class Achievement {
         this.state = State.COMPLETED;
         this.notifyStateChange();
         this.unlocks.forEach((child: Achievement) => {
-            child.state = State.UNLOCKED;
+            child.unlock();
         });
     }
 
