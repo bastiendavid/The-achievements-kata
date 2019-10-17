@@ -29,6 +29,9 @@ export class Achievement {
     }
 
     unlock() {
+        if (this.state === State.COMPLETED) {
+            return;
+        }
         this.state = State.UNLOCKED;
         this.notifyStateChange();
     }

@@ -22,6 +22,16 @@ describe("Achievement", () => {
         expect(achievement.state).to.equal(State.UNLOCKED);
     });
 
+    it("State stays to COMPLETED when the achievement is unlocked", () => {
+        // Given
+        let achievement = new Achievement(new AchievementData("ACH_1", Categories.SIMPLIFY, "description"), []);
+        achievement.state = State.COMPLETED;
+        // When
+        achievement.unlock();
+        // Then
+        expect(achievement.state).to.equal(State.COMPLETED);
+    });
+
     it("Achievement state is set to COMPLETED and all unlocks achievements are set to state UNLOCKED when the achievement is completed", () => {
         // Given
         let childAchievement1 = new Achievement(new AchievementData("ACH_CHILD_1", Categories.SIMPLIFY, "ach child 1"), []);
